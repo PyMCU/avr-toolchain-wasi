@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pymcu-avr-toolchain-wasi"
-version = "0.1.0"
+version = "15.2.0"
 description = "AVR binutils (as/ld/objcopy) as wasm32-wasip1 modules, one wheel for every platform"
 requires-python = ">=3.9"
 license = "GPL-3.0-or-later"
