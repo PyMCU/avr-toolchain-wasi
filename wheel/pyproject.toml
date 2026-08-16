@@ -12,3 +12,12 @@ dependencies = ["wasmtime>=20"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pymcu_avr_toolchain_wasi"]
+# The payload is git-ignored on purpose -- 105 MB of build products do not
+# belong in history -- and hatchling honours VCS ignore files, so without this
+# it ships a wheel with an empty wasm/ directory that installs and then finds
+# no modules. Caught by the smoke test, not by the build.
+artifacts = [
+  "src/pymcu_avr_toolchain_wasi/wasm/**",
+  "src/pymcu_avr_toolchain_wasi/sysroot/**",
+  "src/pymcu_avr_toolchain_wasi/include/**",
+]
