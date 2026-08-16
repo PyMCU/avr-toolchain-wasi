@@ -1,0 +1,28 @@
+name: verify
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, windows-11-arm, ubuntu-latest, ubuntu-24.04-arm, macos-14]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --upgrade pip wasmtime
+      - name: fetch bundle
+        shell: bash
+        run: |
+          curl -fL -o b.tar.xz https://github.com/PyMCU/avr-toolchain-wasi/releases/download/verify-ffi-2026-08-16/verify-ffi.tar.xz
+          tar xf b.tar.xz
+      - name: verify
+        shell: bash
+        working-directory: verify-bundle-ffi
+        run: python verify.py
