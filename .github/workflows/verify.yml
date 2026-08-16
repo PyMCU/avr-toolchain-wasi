@@ -20,7 +20,7 @@ jobs:
       - name: fetch bundle
         shell: bash
         run: |
-          curl -fL -o b.tar.xz https://github.com/PyMCU/avr-toolchain-wasi/releases/download/verify-ffi-2026-08-16/verify-ffi.tar.xz
+          curl -fL -o b.tar.xz https://github.com/PyMCU/avr-toolchain-wasi/releases/download/v15.2.0/verify-ffi.tar.xz
           tar xf b.tar.xz
       - name: verify
         shell: bash
