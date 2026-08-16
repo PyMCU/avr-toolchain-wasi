@@ -1,0 +1,81 @@
+name: publish
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+env:
+  PAYLOAD: https://github.com/PyMCU/avr-toolchain-wasi/releases/download/payload-0.1.0/payload-0.1.0.tar.xz
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: astral-sh/setup-uv@v6
+      - name: stage the verified payload
+        run: |
+          set -euo pipefail
+          curl -fL -o payload.tar.xz "$PAYLOAD"
+          tar xf payload.tar.xz -C wheel/src/pymcu_avr_toolchain_wasi/
+          ls wheel/src/pymcu_avr_toolchain_wasi/
+      - run: uv build --wheel wheel/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheel
+          path: wheel/dist/*.whl
+
+  smoke:
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, windows-11-arm, ubuntu-latest, ubuntu-24.04-arm, macos-14]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { name: wheel, path: dist }
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: install and assemble a real firmware
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install --find-links dist pymcu-avr-toolchain-wasi
+          python - <<'EOF'
+          import hashlib, pathlib, sys
+          import pymcu_avr_toolchain_wasi as t
+          root = pathlib.Path(t.__file__).parent
+          mods = sorted(p.name for p in (root / "wasm").glob("*.wasm"))
+          print("modules:", mods)
+          expect = ["avr-as.wasm", "avr-ld.wasm", "avr-objcopy.wasm", "cc1.wasm", "cc1plus.wasm"]
+          if mods != sorted(expect):
+              sys.exit(f"unexpected module set: {mods}")
+          for m in expect:
+              d = (root / "wasm" / m).read_bytes()
+              print(f"  {m:16} {len(d)/1048576:6.1f} MB  {hashlib.sha256(d).hexdigest()[:16]}")
+          if not (root / "cc1_flags.json").exists():
+              sys.exit("cc1_flags.json missing")
+          print("OK")
+          EOF
+
+  publish:
+    needs: smoke
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { name: wheel, path: dist }
+      - run: ls -lh dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/
