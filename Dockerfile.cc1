@@ -1,0 +1,40 @@
+FROM debian:bookworm AS builder
+
+ARG WASI_SDK_VERSION=33
+ARG WASI_SDK_FULL=33.0
+ARG BINUTILS=2.42
+ARG GCC=15.2.0
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential curl ca-certificates xz-utils perl bison flex \
+        libgmp-dev libmpfr-dev libmpc-dev texinfo && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN arch=$(uname -m) && [ "$arch" = aarch64 ] && arch=arm64 || true; \
+    curl -fsSL -o /tmp/wasi-sdk.tar.gz \
+      "https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${WASI_SDK_VERSION}/wasi-sdk-${WASI_SDK_FULL}-${arch}-linux.tar.gz" && \
+    mkdir -p /opt/wasi-sdk && \
+    tar xzf /tmp/wasi-sdk.tar.gz -C /opt/wasi-sdk --strip-components=1 && \
+    rm /tmp/wasi-sdk.tar.gz
+
+RUN mkdir -p /src && \
+    curl -fsSL "https://ftp.gnu.org/gnu/binutils/binutils-${BINUTILS}.tar.xz" | tar xJ -C /src && \
+    curl -fsSL "https://ftp.gnu.org/gnu/gcc/gcc-${GCC}/gcc-${GCC}.tar.xz" | tar xJ -C /src
+
+# A native avr-as/avr-ld is needed at build time: gcc's configure probes the
+# target assembler for feature support before it will build cc1.
+RUN mkdir -p /build/binutils-native && cd /build/binutils-native && \
+    /src/binutils-${BINUTILS}/configure --target=avr --prefix=/opt/avr-native \
+        --disable-nls --disable-werror --disable-gdb --disable-sim \
+        --disable-libdecnumber --disable-readline > /dev/null && \
+    make -j"$(nproc)" MAKEINFO=true > /dev/null && \
+    make install MAKEINFO=true > /dev/null
+
+RUN cd /src/gcc-${GCC} && ./contrib/download_prerequisites
+
+COPY wasi-shim.h wasi-shim-gcc.h /work/
+COPY build-cc1.sh /work/build-cc1.sh
+ENV WASI_SDK=/opt/wasi-sdk
+RUN chmod +x /work/build-cc1.sh && \
+    GCC_SRC=/src/gcc-${GCC} /work/build-cc1.sh 2>&1 | tail -400

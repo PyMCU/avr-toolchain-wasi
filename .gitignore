@@ -1,0 +1,32 @@
+# Sources and SDKs: downloaded by the build scripts.
+binutils-2.42/
+binutils-2.42.tar.xz
+wasi-sdk
+wasi-sdk-*/
+wasi-sdk.tar.gz
+build/
+native/
+
+# Build products: CI produces these, they do not belong in history.
+*.wasm
+dist/
+dist-*/
+wheel*/dist/
+wheel*/build/
+sysroot-min/
+sysroot-ffi/
+
+# Machine-specific: tied to OS + CPU + wasmtime version.
+.cwasm*/
+
+# Test corpus and scratch.
+t/
+verify-bundle/
+verify-bundle-ffi/
+__pycache__/
+*.log
+
+# Wheel payload: copied in by the build, not source.
+wheel*/src/*/include/
+wheel*/src/*/wasm/
+wheel*/src/*/sysroot/

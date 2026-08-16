@@ -1,0 +1,282 @@
+{
+  "atmega168": {
+    "multilib": "avr5",
+    "libdir": "avr5",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATmega168__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=atmega168",
+      "-mn-flash=1",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr5"
+    ]
+  },
+  "atmega168p": {
+    "multilib": "avr5",
+    "libdir": "avr5",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATmega168P__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=atmega168p",
+      "-mn-flash=1",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr5"
+    ]
+  },
+  "atmega2560": {
+    "multilib": "avr6",
+    "libdir": "avr6",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATmega2560__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=atmega2560",
+      "-mn-flash=4",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr6"
+    ]
+  },
+  "atmega328": {
+    "multilib": "avr5",
+    "libdir": "avr5",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATmega328__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=atmega328",
+      "-mn-flash=1",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr5"
+    ]
+  },
+  "atmega328p": {
+    "multilib": "avr5",
+    "libdir": "avr5",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATmega328P__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=atmega328p",
+      "-mn-flash=1",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr5"
+    ]
+  },
+  "atmega32u4": {
+    "multilib": "avr5",
+    "libdir": "avr5",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATmega32U4__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=atmega32u4",
+      "-mn-flash=1",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr5"
+    ]
+  },
+  "atmega48": {
+    "multilib": "avr4",
+    "libdir": "avr4",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATmega48__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=atmega48",
+      "-mn-flash=1",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr4"
+    ]
+  },
+  "atmega48p": {
+    "multilib": "avr4",
+    "libdir": "avr4",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATmega48P__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=atmega48p",
+      "-mn-flash=1",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr4"
+    ]
+  },
+  "atmega88": {
+    "multilib": "avr4",
+    "libdir": "avr4",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATmega88__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=atmega88",
+      "-mn-flash=1",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr4"
+    ]
+  },
+  "atmega88p": {
+    "multilib": "avr4",
+    "libdir": "avr4",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATmega88P__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=atmega88p",
+      "-mn-flash=1",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr4"
+    ]
+  },
+  "attiny13": {
+    "multilib": "avr25/tiny-stack",
+    "libdir": "avr25/tiny-stack",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATtiny13__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=attiny13",
+      "-mn-flash=1",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr25"
+    ]
+  },
+  "attiny13a": {
+    "multilib": "avr25/tiny-stack",
+    "libdir": "avr25/tiny-stack",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATtiny13A__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=attiny13a",
+      "-mn-flash=1",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr25"
+    ]
+  },
+  "attiny2313": {
+    "multilib": "avr25/tiny-stack",
+    "libdir": "avr25/tiny-stack",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATtiny2313__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=attiny2313",
+      "-mn-flash=1",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr25"
+    ]
+  },
+  "attiny24": {
+    "multilib": "avr25/tiny-stack",
+    "libdir": "avr25/tiny-stack",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATtiny24__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=attiny24",
+      "-mn-flash=1",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr25"
+    ]
+  },
+  "attiny25": {
+    "multilib": "avr25/tiny-stack",
+    "libdir": "avr25/tiny-stack",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATtiny25__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=attiny25",
+      "-mn-flash=1",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr25"
+    ]
+  },
+  "attiny4313": {
+    "multilib": "avr25",
+    "libdir": "avr25",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATtiny4313__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=attiny4313",
+      "-mn-flash=1",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr25"
+    ]
+  },
+  "attiny44": {
+    "multilib": "avr25",
+    "libdir": "avr25",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATtiny44__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=attiny44",
+      "-mn-flash=1",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr25"
+    ]
+  },
+  "attiny45": {
+    "multilib": "avr25",
+    "libdir": "avr25",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATtiny45__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=attiny45",
+      "-mn-flash=1",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr25"
+    ]
+  },
+  "attiny84": {
+    "multilib": "avr25",
+    "libdir": "avr25",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATtiny84__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=attiny84",
+      "-mn-flash=1",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr25"
+    ]
+  },
+  "attiny85": {
+    "multilib": "avr25",
+    "libdir": "avr25",
+    "libm_exists": true,
+    "flags": [
+      "-D__AVR_ATtiny85__",
+      "-D__AVR_RODATA_IN_RAM__=1",
+      "-D__AVR_DEVICE_NAME__=attiny85",
+      "-mn-flash=1",
+      "-mdouble=32",
+      "-mlong-double=32",
+      "-mmcu=avr25"
+    ]
+  }
+}
